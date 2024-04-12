@@ -16,13 +16,25 @@ bool isPrime(int n)
     return true;
 }
 
+int sum(int n)
+{
+    if (n < 10)
+        return n;
+    return (n % 10) + sum(n / 10);
+}
+
 bool isPerPrime(int n)
 {
-    if (n == 0)
-        return true;
-    if (!isPrime(n % 10))
+    if (isPrime(n) == 0)
         return false;
-    return isPerPrime(n / 10);
+    if (isPrime(n) == 1)
+    {
+        if (isPrime(sum(n) == 0))
+            return false;
+        if (n < 10 && isPrime(n) == 1)
+            return true;
+    }
+    return isPerPrime(sum(n));
 }
 
 int *generatePerfectPrime(int n)
